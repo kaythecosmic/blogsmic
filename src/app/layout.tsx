@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Jost } from "next/font/google";
+import { Onest } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 
-const jost = Jost({ subsets: ["cyrillic"] });
+const onest = Onest({ subsets: ["cyrillic"] });
 
 export const metadata: Metadata = {
   title: "blogsmic",
@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("min-h-screen transition duration-900", jost.className)}>
+      <body className={cn("min-h-screen transition duration-900", onest.className)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

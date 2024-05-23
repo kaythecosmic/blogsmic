@@ -40,7 +40,7 @@ const Navbar = () => {
             onPressedChange={() => handleTheme()}
             className="rounded-sm"
           >
-            {darkTheme ? <Sun className=" h-4"/> : <Moon className=" h-4"/>}
+            {darkTheme ? <Sun className=" h-4" /> : <Moon className=" h-4" />}
           </Toggle>
         </div>
       </nav>
