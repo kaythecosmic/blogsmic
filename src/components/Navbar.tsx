@@ -13,7 +13,6 @@ import { useTheme } from "next-themes";
 const Navbar = () => {
   const [darkTheme, setDarkTheme] = useState(false);
   const { setTheme } = useTheme();
-  console.log(setTheme);
 
   const handleTheme = () => {
     if (darkTheme) {

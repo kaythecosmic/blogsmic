@@ -49,16 +49,19 @@ const Blog: React.FC<InputProps> = ({
     >
       <div className="flex flex-row items-end justify-between border-b-[1px] pb-1 border-accent-background">
         <div>
-          <h5 className="font-light text-[0.8rem] text-foreground mb-[1px]">
+          <h5 className="font-light text-[0.8rem] lg:text-[0.8rem] text-foreground mb-[1px]">
             {days[date.getDay()]} - {date.getDate()} {months[date.getMonth()]},{" "}
             {date.getFullYear()}
           </h5>
-          <Link href={slug} className="font-bold text-md lg:text-lg xl:text-xl hover:underline">
+          <Link
+            href={slug}
+            className="font-bold text-lg lg:text-xl 2xl:text-2xl hover:underline"
+          >
             {title}
           </Link>
         </div>
         <div>
-          <h5 className=" text-[0.8rem] text-foreground font-bold">
+          <h5 className=" text-[0.8rem] text-foreground font-light lg:font-bold">
             {readTime} MIN READ
           </h5>
         </div>
