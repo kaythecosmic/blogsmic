@@ -5,7 +5,12 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 export async function GET(req: NextApiRequest, res: NextApiResponse) {
     try {
         console.log("Hi from the server!");
-        let allBlogs = await prismadb.blog.findMany({ where: {}, });
+        console.log("We are into the server");
+        let allBlogs = await prismadb.blog.findMany(
+            {
+                where: {},
+            }
+        );
         return Response.json(allBlogs);
     } catch (error) {
         console.log({ error });

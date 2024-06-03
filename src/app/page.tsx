@@ -1,27 +1,57 @@
+"use client";
 import Blog from "@/components/Blog";
-import prismadb from "@/lib/prismadb";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import { useEffect, useState } from "react";
+import useBlogs from "@/hooks/useBlogs";
+import { typeBlog } from "@/types/Blog";
+import Spinner from "@/components/ui/spinner";
 
 export default function Home() {
+  const [blogs, setBlogs] = useState<typeBlog[]>([]);
+  const { data, error, isLoading } = useBlogs();
 
-  // async function getData() {
-  //   allBlogs = await prismadb.blog.findMany({
-  //     where: {},
-  //   });
-  // }
+  useEffect(() => {
+    if (data) {
+      data.reverse();
+      setBlogs(data);
+    } else if (error) {
+      console.log("Fetch failed!");
+    }
+  }, [data, error]);
 
-  // const blogs = await 
+  if (isLoading) {
+    return (
+      <MaxWidthWrapper className=" pt-4">
+        <h5 className="flex justify-center items-center bg-muted text-center p-3">
+          <Spinner />
+        </h5>
+      </MaxWidthWrapper>
+    );
+  }
+
+  if (error) {
+    return (
+      <MaxWidthWrapper className=" pt-4">
+        <h5 className=" bg-muted text-center p-3">
+          Could not fetch blogs. Please reload.
+        </h5>
+      </MaxWidthWrapper>
+    );
+  }
 
   return (
     <MaxWidthWrapper className=" pt-4">
-      <Blog
-        id="123456"
-        title="Hello, World!"
-        slug="hello-world"
-        content="this is my first ever blog!"
-        date={new Date()}
-        readTime={5}
-      />
+      {blogs.map((blog) => (
+        <Blog
+          key={blog.id}
+          id={blog.id}
+          title={blog.title}
+          slug={blog.slug}
+          content={blog.content}
+          date={new Date(blog.date)}
+          readTime={blog.readTime}
+        />
+      ))}
     </MaxWidthWrapper>
   );
 }

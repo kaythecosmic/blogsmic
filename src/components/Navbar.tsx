@@ -29,15 +29,18 @@ const Navbar = () => {
       <nav className="flex justify-between items-center border-0 border-b-[1px] border-foreground pt-2 pb-1">
         <div>
           <Link href="/">
-            <h1 className="font-bold text-lg px-4">the blogsmic</h1>
+            <h1 className="font-bold text-lg">the blogsmic</h1>
           </Link>
         </div>
         <div className="flex gap-1">
-          <Button variant="link">About</Button>
+          <Button variant="link">
+            <Link href="/scratch"> + new</Link>
+          </Button>
+          <Button variant="link">about</Button>
           <Toggle
             aria-label="Toggle Theme"
             onPressedChange={() => handleTheme()}
-            className="rounded-sm"
+            className="rounded-sm p-0"
           >
             {darkTheme ? <Sun className=" h-4" /> : <Moon className=" h-4" />}
           </Toggle>

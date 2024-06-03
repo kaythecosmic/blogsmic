@@ -61,14 +61,14 @@ const Blog: React.FC<InputProps> = ({
           </Link>
         </div>
         <div>
-          <h5 className=" text-[0.8rem] text-foreground font-light lg:font-bold">
+          <h5 className="text-[0.8rem] text-foreground font-light lg:font-bold">
             {readTime} MIN READ
           </h5>
         </div>
       </div>
 
       <div>
-        <p className="font-light text-sm text-justify mt-2">{content}</p>
+        <p className="text-sm text-justify mt-2" dangerouslySetInnerHTML={{ __html: content }}/>
       </div>
     </div>
   );
