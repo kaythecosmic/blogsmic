@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import QuillRichTE from "@/components/QuillRichTE";
 
-const page = () => {
+const SratchPage = () => {
   const [blogTitle, setBlogTitle] = useState("");
   const [blogContent, setBlogContent] = useState("");
 
@@ -65,4 +65,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SratchPage;
