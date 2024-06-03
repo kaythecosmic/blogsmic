@@ -1,8 +1,8 @@
 import prismadb from "@/lib/prismadb";
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest } from "next/server";
 
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: NextRequest) {
     try {
         console.log("Hi from the server!");
         console.log("We are into the server");
