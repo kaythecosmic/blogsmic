@@ -14,6 +14,7 @@ export default function Home() {
     if (data) {
       data.reverse();
       setBlogs(data);
+      console.log(data.length)
     } else if (error) {
       console.log("Fetch failed!");
     }
