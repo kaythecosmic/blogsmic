@@ -7,14 +7,14 @@ import { typeBlog } from "@/types/Blog";
 import Spinner from "@/components/ui/spinner";
 
 export default function Home() {
+
   const [blogs, setBlogs] = useState<typeBlog[]>([]);
-  const { data, error, isLoading } = useBlogs();
+  const { data, error, isLoading } = useBlogs();;
 
   useEffect(() => {
-    if (data) {
+    if (data && !isLoading) {
       data.reverse();
       setBlogs(data);
-      console.log(data.length)
     } else if (error) {
       console.log("Fetch failed!");
     }

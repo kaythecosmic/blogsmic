@@ -54,7 +54,7 @@ const Blog: React.FC<InputProps> = ({
             {date.getFullYear()}
           </h5>
           <Link
-            href={slug}
+            href={"read/" + slug}
             className="font-bold text-lg lg:text-xl 2xl:text-2xl hover:underline"
           >
             {title}
@@ -68,7 +68,7 @@ const Blog: React.FC<InputProps> = ({
       </div>
 
       <div>
-        <p className="text-sm text-justify mt-2" dangerouslySetInnerHTML={{ __html: content }}/>
+        <p className="text-sm text-justify mt-2" dangerouslySetInnerHTML={{ __html: content }} />
       </div>
     </div>
   );

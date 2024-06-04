@@ -3,7 +3,7 @@ import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { UploadIcon } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import QuillRichTE from "@/components/QuillRichTE";
 
@@ -11,9 +11,10 @@ const SratchPage = () => {
   const [blogTitle, setBlogTitle] = useState("");
   const [blogContent, setBlogContent] = useState("");
 
-  const router = useRouter();
-  console.log(blogContent);
+  const alltags = ["Music", "Photography", "Design", "Movies", "Travel", "Fashion", "Food", "Reviews", "Education", "Art"]
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
 
+  const router = useRouter();
   const handleBlogPost = () => {
     const tokens = blogContent.split(" ");
     let newBlog = {
@@ -22,10 +23,17 @@ const SratchPage = () => {
       content: blogContent,
       date: new Date(),
       readTime: Math.ceil(tokens.length / 230),
+      tags: selectedTags
     };
-    axios.post("/api/insert/", newBlog);
-    router.push("/");
+    axios.post("/api/insert/", newBlog).then(res => {
+      router.push("/");
+    });
   };
+
+  const handleTagSelect = (tag: string) => {
+    const newSelectedTags = [...selectedTags, tag];
+    setSelectedTags(newSelectedTags);
+  }
 
   const handleBlogContentChange = (latestContent: string) => {
     setBlogContent(latestContent);
@@ -46,11 +54,24 @@ const SratchPage = () => {
           }}
           required
         />
+
+        {/* Tags */}
+        <div className="flex flex-wrap mt-2 gap-2 justify-start text-[0.7rem]">
+          {alltags.map((tag) => (
+            <span id={tag}
+              key={tag}
+              className={`py-1 px-3 border rounded-full cursor-pointer transition font-medium hover:bg-accent ${selectedTags.includes(tag) ? "bg-slate-600 text-white hover:text-black hover:bg-slate-600" : ""}`}
+              onClick={(e) => { handleTagSelect(tag) }} >
+              {selectedTags.includes(tag) ? "- " + tag : "+ " + tag}
+            </span>
+          ))}
+        </div>
+
         {/* quillTE */}
 
         <QuillRichTE onChange={handleBlogContentChange} />
 
-        <div className="flex justify-end mt-[4rem]">
+        <div className="flex justify-end mt-[2rem]">
           <Button
             variant={"secondary"}
             className="text-md font-bold border hover:bg-background"

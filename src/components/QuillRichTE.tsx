@@ -40,7 +40,7 @@ export default function QuillRichTE({ onChange }: any) {
 
     return (
         <div className="h-[30rem] lg:h-[40rem]">
-            <div className="h-[95%] mt-5">
+            <div className="h-[95%] mt-2">
                 <QuillEditor
                     value={content}
                     onChange={handleEditorChange}

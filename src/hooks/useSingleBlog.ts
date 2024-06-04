@@ -3,14 +3,12 @@
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 
-const useBlogs = () => {
-  const { data, error, isLoading } = useSWR(`/api/blogs/`, fetcher, {
+const useSingleBlog = (blogSlug: string) => {
+  const { data, error, isLoading } = useSWR(`/api/blogs/${blogSlug}`, fetcher, {
     revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
-
-  console.log("In useBlog Hook");
   return {
     data,
     error,
@@ -18,4 +16,4 @@ const useBlogs = () => {
   };
 };
 
-export default useBlogs;
+export default useSingleBlog;
