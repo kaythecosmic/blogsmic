@@ -26,7 +26,8 @@ const SratchPage = () => {
       tags: selectedTags
     };
     axios.post("/api/insert/", newBlog).then(res => {
-      window.location.href = "/";
+    
+      // window.location.href = "/";
     });
   };
 
