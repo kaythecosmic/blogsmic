@@ -1,9 +1,9 @@
 import prismadb from "@/lib/prismadb";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: NextRequest, res: NextResponse) {
   if (req.method !== "GET") {
-    return res.status(405).end();
+    return new Response("Not a valid request method.", {status:501});
   }
   try {
     const url = req.url ?? "";
