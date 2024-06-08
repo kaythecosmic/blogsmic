@@ -4,7 +4,7 @@ import prismadb from "@/lib/prismadb";
 export async function GET(req: NextRequest, res: NextResponse) {
 
     try {
-        const theBlogPost = await prismadb.blog.deleteMany();
+        // const theBlogPost = await prismadb.blog.deleteMany();
         return new Response("Successfull delete", {
             status: 200,
         });
