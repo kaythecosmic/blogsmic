@@ -9,8 +9,6 @@ const useBlogs = () => {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
-
-  console.log("In useBlog Hook");
   return {
     data,
     error,

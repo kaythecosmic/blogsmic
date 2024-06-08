@@ -6,6 +6,7 @@ import useSingleBlog from '@/hooks/useSingleBlog'
 import { usePathname } from "next/navigation";
 import tagList from '@/lib/taglist';
 import { TagColorMap } from '@/lib/taglist';
+import { Tags } from 'lucide-react';
 
 const ReadSingleBlog = () => {
 
@@ -76,15 +77,18 @@ const ReadSingleBlog = () => {
                 </div>
 
                 {/* Tags */}
-                <div className="flex flex-wrap mt-2 gap-2 justify-start text-[0.7rem]">
-                    {data.tags.map((tag: keyof typeof TagColorMap) => (
-                        <span id={tag}
-                            key={tag}
-                            className={`py-px px-2 rounded-full text-black font-bold ${TagColorMap[tag]}`}>
-                            {tag}
-                        </span>
-                    ))}
-                </div>
+                {data.tags.length > 0 &&
+                    <div className="flex flex-wrap mt-2 gap-2 justify-start text-[0.7rem]">
+                        <span className='pt-0.5 flex items-center justify-center'><Tags className='h-4 flex items-center justify-center' /></span>
+                        {data.tags.map((tag: keyof typeof TagColorMap) => (
+                            <span id={tag}
+                                key={tag}
+                                className={`py-px px-2 align-middle rounded-full text-black font-bold ${TagColorMap[tag]}`}>
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                }
 
                 {/* Content */}
                 <div className='my-4' dangerouslySetInnerHTML={{ __html: data.content }} />

@@ -5,11 +5,12 @@ import { useEffect, useState } from "react";
 import useBlogs from "@/hooks/useBlogs";
 import { typeBlog } from "@/types/Blog";
 import Spinner from "@/components/ui/spinner";
+import Link from "next/link";
 
 export default function Home() {
 
   const [blogs, setBlogs] = useState<typeBlog[]>([]);
-  const { data, error, isLoading } = useBlogs();;
+  const { data, error, isLoading } = useBlogs();
 
   useEffect(() => {
     if (data && !isLoading) {
@@ -22,8 +23,8 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <MaxWidthWrapper className=" pt-4">
-        <h5 className="flex justify-center items-center bg-muted text-center p-3">
+      <MaxWidthWrapper className="pt-4">
+        <h5 className="flex justify-center items-center text-center p-3">
           <Spinner />
         </h5>
       </MaxWidthWrapper>
@@ -41,8 +42,8 @@ export default function Home() {
   }
 
   return (
-    <MaxWidthWrapper className=" pt-4">
-      {blogs.map((blog) => (
+    <MaxWidthWrapper className="my-4">
+      {blogs.length > 0 ? blogs.map((blog) => (
         <Blog
           key={blog.id}
           id={blog.id}
@@ -52,7 +53,8 @@ export default function Home() {
           date={new Date(blog.date)}
           readTime={blog.readTime}
         />
-      ))}
+      )) : <div className="text-2xl text-center p-4 font-bold">
+        Be the first one to <Link href="/scratch" className="text-emerald-500 underline hover:text-emerald-700">post a blog!</Link> </div>}
     </MaxWidthWrapper>
   );
 }

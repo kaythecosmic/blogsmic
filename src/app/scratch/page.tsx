@@ -26,13 +26,26 @@ const SratchPage = () => {
       tags: selectedTags
     };
     axios.post("/api/insert/", newBlog).then(res => {
-      router.push("/");
+      window.location.href = "/";
     });
   };
 
   const handleTagSelect = (tag: string) => {
-    const newSelectedTags = [...selectedTags, tag];
-    setSelectedTags(newSelectedTags);
+    if (selectedTags.indexOf(tag) > -1) {
+      console.log("found in array");
+      console.log(selectedTags);
+
+      const index = selectedTags.indexOf(tag);
+      if (index > -1) {
+        const newSelectedTags = selectedTags.slice(0, index - 1).concat(selectedTags.slice(index, selectedTags.length - 1));
+        setSelectedTags(newSelectedTags);
+      }
+    } else {
+      console.log(selectedTags);
+      const newSelectedTags = [...selectedTags, tag];
+      setSelectedTags(newSelectedTags);
+
+    }
   }
 
   const handleBlogContentChange = (latestContent: string) => {
