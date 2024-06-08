@@ -109,7 +109,7 @@ const AuthPage = () => {
                                 <Button variant="outline" className="px-4 py-2 font-bold hover:bg-emerald-400 hover:text-black">Login</Button>
                             </div>
                             <span className="mt-4 text-center w-full">
-                                Don't have an account? Register <span className="font-bold text-emerald-600 cursor-pointer hover:underline" onClick={toggleVariant}>here</span>
+                                Don&apos;t have an account? Register <span className="font-bold text-emerald-600 cursor-pointer hover:underline" onClick={toggleVariant}>here</span>
                             </span>
                         </div>
                     }
