@@ -10,16 +10,17 @@ import Link from "next/link";
 export default function Home() {
 
   const [blogs, setBlogs] = useState<typeBlog[]>([]);
-  const { data, error, isLoading } = useBlogs();
+  const { data, error, isLoading, mutate } = useBlogs();
 
   useEffect(() => {
     if (data && !isLoading) {
       data.reverse();
+      mutate();
       setBlogs(data);
     } else if (error) {
       console.log("Fetch failed!");
     }
-  }, [data, error]);
+  }, [data]);
 
   if (isLoading) {
     return (
