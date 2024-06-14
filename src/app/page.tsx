@@ -2,23 +2,23 @@
 import Blog from "@/components/Blog";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { useEffect, useState } from "react";
-import useBlogs from "@/hooks/useBlogs";
 import { typeBlog } from "@/types/Blog";
 import Spinner from "@/components/ui/spinner";
 import Link from "next/link";
+import useSWR from "swr";
+import fetcher from "@/lib/fetcher";
 
 export default function Home() {
 
-  const [blogs, setBlogs] = useState<typeBlog[]>([]);
-  const { data, error, isLoading, mutate } = useBlogs();
+  const [blogs, setBlogs] = useState<typeBlog[]>()
+  const { data, error, isLoading } = useSWR<typeBlog[]>(`/api/blogs`, fetcher);
 
   useEffect(() => {
     if (data && !isLoading) {
       data.reverse();
-      mutate();
       setBlogs(data);
     } else if (error) {
-      console.log("Fetch failed!");
+      console.log("Still Fetching");
     }
   }, [data]);
 
@@ -44,7 +44,7 @@ export default function Home() {
 
   return (
     <MaxWidthWrapper className="my-4">
-      {blogs.length > 0 ? blogs.map((blog) => (
+      {blogs && blogs.length > 0 ? blogs.map((blog) => (
         <Blog
           key={blog.id}
           id={blog.id}

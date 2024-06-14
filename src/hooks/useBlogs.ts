@@ -2,10 +2,8 @@
 
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
-import { mutate } from "swr";
 
 const useBlogs = () => {
-
   const { data, error, isLoading, mutate } = useSWR(`/api/blogs`, fetcher, {
     revalidateIfStale: false,
     revalidateOnFocus: false,
