@@ -13,14 +13,14 @@ export default function Home() {
   const [blogs, setBlogs] = useState<typeBlog[]>()
   const { data, error, isLoading } = useSWR<typeBlog[]>(`/api/blogs`, fetcher);
 
-  async function callMutate() {
-    await mutate(`/api/blogs`);
+  function callMutate() {
+    mutate(`/api/blogs`);
   }
   useEffect(() => {
     if (data && !isLoading) {
-      // data.reverse();
-      // setBlogs(data);
-      callMutate();
+      data.reverse();
+      setBlogs(data);
+      mutate(`/api/blogs`);
     } else if (error) {
       console.log("Still Fetching");
     }
