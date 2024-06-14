@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { typeBlog } from "@/types/Blog";
 import Spinner from "@/components/ui/spinner";
 import Link from "next/link";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import fetcher from "@/lib/fetcher";
 
 export default function Home() {
@@ -13,10 +13,14 @@ export default function Home() {
   const [blogs, setBlogs] = useState<typeBlog[]>()
   const { data, error, isLoading } = useSWR<typeBlog[]>(`/api/blogs`, fetcher);
 
+  async function callMutate() {
+    await mutate(`/api/blogs`);
+  }
   useEffect(() => {
     if (data && !isLoading) {
-      data.reverse();
-      setBlogs(data);
+      // data.reverse();
+      // setBlogs(data);
+      callMutate();
     } else if (error) {
       console.log("Still Fetching");
     }
@@ -44,7 +48,7 @@ export default function Home() {
 
   return (
     <MaxWidthWrapper className="my-4">
-      {blogs && blogs.length > 0 ? blogs.map((blog) => (
+      {data && data.length > 0 ? data.map((blog) => (
         <Blog
           key={blog.id}
           id={blog.id}
