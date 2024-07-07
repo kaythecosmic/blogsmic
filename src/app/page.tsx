@@ -1,5 +1,5 @@
 "use client";
-import Blog from "@/components/Blog";
+import { Blog } from "@/components/Blog";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { useEffect, useState } from "react";
 import { typeBlog } from "@/types/Blog";
@@ -12,15 +12,10 @@ export default function Home() {
 
   const [blogs, setBlogs] = useState<typeBlog[]>()
   const { data, error, isLoading } = useSWR<typeBlog[]>(`/api/blogs`, fetcher);
-
-  function callMutate() {
-    mutate(`/api/blogs`);
-  }
   useEffect(() => {
     if (data && !isLoading) {
-      data.reverse();
-      setBlogs(data);
-      mutate(`/api/blogs`);
+      // data.reverse();
+      setBlogs(data); 
     } else if (error) {
       console.log("Still Fetching");
     }

@@ -1,5 +1,4 @@
 "use client";
-
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 
@@ -9,12 +8,12 @@ const useBlogs = () => {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
+  mutate()
 
   return {
     data,
     error,
     isLoading: !data && !error,
-    mutate
   };
 };
 

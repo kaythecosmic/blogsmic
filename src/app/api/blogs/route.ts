@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
     const allBlogs = await prismadb.blog.findMany();
     console.log(allBlogs);
 
-    return Response.json(allBlogs);
+    return Response.json(allBlogs.reverse());
   } catch (error) {
     console.log({ error });
     return new Response("Failed to fetch from the database.", { status: 500 });

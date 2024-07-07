@@ -39,6 +39,9 @@ const Navbar = () => {
           {/* <Button variant="destructive">
             <Link href="/api/deleteAll">delete all</Link>
           </Button> */}
+          <Button variant="ghost">
+            <Link href="/admin">Admin</Link>
+          </Button>
           <Button variant="link">
             <Link href="/scratch"> + new</Link>
           </Button>
