@@ -9,11 +9,11 @@ import Spinner from "@/components/ui/spinner";
 
 export default function Home() {
     const [blogs, setBlogs] = useState<typeBlog[] | undefined>(undefined);
-    
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetcher("/api/blogs");
+                const response = await fetcher("/api/blogs?param=" + new Date().getTime().toString());
                 if (response.length > 0) {
                     setBlogs(response);
 
