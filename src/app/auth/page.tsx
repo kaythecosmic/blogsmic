@@ -63,7 +63,7 @@ const AuthPage = () => {
                             />
 
                             <Input
-                                id="password"
+                                id="confirmPassword"
                                 onchange={(event: any) => setPassword(event.target.value)}
                                 value={password}
                                 label="Confirm Password"

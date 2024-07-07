@@ -14,28 +14,37 @@ export default function Home() {
 
     const fetch = async (url: string) => {
         try {
-            const res = await axios.get(url).then(res => res.data)
+            const res = await axios.get(url, {
+                headers: {
+                    'Cache-Control': 'no-cache'
+                }
+            }).then(res => res.data)
             return res
         } catch (error) {
             console.log(error);
         }
     };
 
-    const { data, error, isLoading, mutate } = useSWR<typeBlog[]>(`/api/blogs`, fetch,
+    const { data, error, isLoading, mutate } = useSWR<typeBlog[]>(
+        // '/api/blogs?param=' + new Date().getDate().toString(),
+        '/api/blogs?param=' + new Date().getDate().toString(),
+        fetch,
         {
-            revalidateOnFocus: true,
-            revalidateIfStale: true,
-            revalidateOnReconnect: true
+            revalidateOnMount: true,
+            revalidateOnFocus: false,
+            dedupingInterval: 0,
+            refreshInterval: 0,
+            revalidateIfStale: false
         });
-    
+
     useEffect(() => {
         if (data && !isLoading) {
-            mutate(data, true);
+            // mutate(data, true);
             setBlogs(data);
         } else if (error) {
             console.log("Still Fetching");
         }
-    },[data]);
+    }, [data]);
 
     if (isLoading) {
         return (
