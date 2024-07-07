@@ -3,64 +3,35 @@ import { Blog } from "@/components/Blog";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { useEffect, useState } from "react";
 import { typeBlog } from "@/types/Blog";
-import Spinner from "@/components/ui/spinner";
 import Link from "next/link";
-import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
-import axios from "axios";
+import Spinner from "@/components/ui/spinner";
+
 export default function Home() {
-
-    const [blogs, setBlogs] = useState<typeBlog[]>()
-
-    const fetch = async (url: string) => {
-        try {
-            const res = await axios.get(url, {
-                headers: {
-                    'Cache-Control': 'no-cache'
-                }
-            }).then(res => res.data)
-            return res
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const { data, error, isLoading, mutate } = useSWR<typeBlog[]>(
-        // '/api/blogs?param=' + new Date().getDate().toString(),
-        '/api/blogs?param=' + new Date().getDate().toString(),
-        fetch,
-        {
-            revalidateOnMount: true,
-            revalidateOnFocus: false,
-            dedupingInterval: 0,
-            refreshInterval: 0,
-            revalidateIfStale: false
-        });
-
+    const [blogs, setBlogs] = useState<typeBlog[] | undefined>(undefined);
+    
     useEffect(() => {
-        if (data && !isLoading) {
-            // mutate(data, true);
-            setBlogs(data);
-        } else if (error) {
-            console.log("Still Fetching");
-        }
-    }, [data]);
+        const fetchData = async () => {
+            try {
+                const response = await fetcher("/api/blogs");
+                if (response.length > 0) {
+                    setBlogs(response);
 
-    if (isLoading) {
+                } else {
+                    throw new Error('Failed to fetch data');
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+    }, [])
+
+    if (!blogs) {
         return (
             <MaxWidthWrapper className="pt-4">
                 <h5 className="flex justify-center items-center text-center p-3">
                     <Spinner />
-                </h5>
-            </MaxWidthWrapper>
-        );
-    }
-
-    if (error) {
-        return (
-            <MaxWidthWrapper className=" pt-4">
-                <h5 className=" bg-muted text-center p-3">
-                    Could not fetch blogs. Please reload.
                 </h5>
             </MaxWidthWrapper>
         );
