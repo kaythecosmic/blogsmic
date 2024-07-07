@@ -5,10 +5,9 @@ import { useEffect, useState } from "react";
 import { typeBlog } from "@/types/Blog";
 import Spinner from "@/components/ui/spinner";
 import Link from "next/link";
-import useSWR, { mutate } from "swr";
+import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 import axios from "axios";
-
 export default function Home() {
 
     const [blogs, setBlogs] = useState<typeBlog[]>()
@@ -28,13 +27,10 @@ export default function Home() {
             revalidateIfStale: true,
             revalidateOnReconnect: true
         });
-    mutate()
-
-    console.log("Hello 1");
-    console.log(blogs);
     
     useEffect(() => {
         if (data && !isLoading) {
+            mutate(data, true);
             setBlogs(data);
         } else if (error) {
             console.log("Still Fetching");
