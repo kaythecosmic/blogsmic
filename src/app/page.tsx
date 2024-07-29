@@ -1,32 +1,23 @@
-"use client";
+"use client"
 import { Blog } from "@/components/Blog";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { useEffect, useState } from "react";
 import { typeBlog } from "@/types/Blog";
 import Link from "next/link";
-import fetcher from "@/lib/fetcher";
 import Spinner from "@/components/ui/spinner";
+import { fetchTodos } from "@/actions/fetchTodos";
 
 export default function Home() {
     const [blogs, setBlogs] = useState<typeBlog[] | undefined>(undefined);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetcher("/api/blogs?param=" + new Date().getTime().toString());
-                if (response.length > 0) {
-                    setBlogs(response);
-
-                } else {
-                    throw new Error('Failed to fetch data');
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-        fetchData();
-    }, [])
-
+        async function loadBlogs() {
+            const fetchedBlogs = await fetchTodos();
+            console.log(fetchedBlogs);
+            setBlogs(fetchedBlogs);
+        }
+        loadBlogs();
+    }, []);
     if (!blogs) {
         return (
             <MaxWidthWrapper className="pt-4">
@@ -36,10 +27,9 @@ export default function Home() {
             </MaxWidthWrapper>
         );
     }
-
     return (
         <MaxWidthWrapper className="my-4">
-            {blogs && blogs.length > 0 ? blogs.map((blog) => (
+            {blogs ? blogs.map((blog: any) => (
                 <Blog
                     key={blog.id}
                     id={blog.id}
