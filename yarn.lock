@@ -2975,6 +2975,10 @@ quill-delta@^5.1.0:
     lodash.clonedeep "^4.5.0"
     lodash.isequal "^4.5.0"
 
+"quill-monorepo@github:quilljs/quill":
+  version "2.0.3"
+  resolved "git+ssh://git@github.com/quilljs/quill.git#ebe16ca24724ac4f52505628ac2c4934f0a98b85"
+
 quill@^2.0.2:
   version "2.0.2"
   resolved "https://registry.npmjs.org/quill/-/quill-2.0.2.tgz"
