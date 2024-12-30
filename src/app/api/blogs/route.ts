@@ -1,6 +1,7 @@
 import prismadb from "@/lib/prismadb";
 import { NextRequest } from "next/server";
 import { typeBlog } from "@/types/Blog";
+
 export async function GET(req: NextRequest) {
   try {
     const allBlogs: typeBlog[] = await prismadb.blog.findMany();

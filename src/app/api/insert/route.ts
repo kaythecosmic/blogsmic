@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prismadb from "@/lib/prismadb";
+import { supabase } from "@/lib/supabase";
 
 export async function POST(req: NextRequest, res: NextResponse) {
   console.log("you are in route.ts");
@@ -12,16 +13,21 @@ export async function POST(req: NextRequest, res: NextResponse) {
   try {
     console.log(req.url);
     const { slug, title, content, date, readTime, tags } = await req.json();
-    const theBlogPost = await prismadb.blog.create({
-      data: {
-        slug,
-        title,
-        content,
-        date,
-        readTime,
-        tags
-      },
-    });
+    const { data, error } = await supabase
+      .from("blogs")
+      .insert([
+        {
+          slug: slug,
+          title: title,
+          content: content,
+          date: date,
+          readTime: readTime,
+          tags: tags,
+        },
+      ])
+      .select();
+    console.log(data);
+    console.log(error);
 
     return new Response("Successfull push", {
       status: 200,

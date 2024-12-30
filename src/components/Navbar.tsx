@@ -33,19 +33,15 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex gap-1">
-          <Button variant="ghost">
-            <Link href="/auth">Auth</Link>
-          </Button>
           {/* <Button variant="destructive">
             <Link href="/api/deleteAll">delete all</Link>
           </Button> */}
-          <Button variant="ghost">
-            <Link href="/admin">Admin</Link>
-          </Button>
           <Button variant="link">
             <Link href="/scratch"> + new</Link>
           </Button>
-          <Button variant="link">about</Button>
+          <Button variant="link">
+            <Link href="/about">about</Link>
+          </Button>
           <Toggle
             aria-label="Toggle Theme"
             onPressedChange={() => handleTheme()}
