@@ -2,14 +2,15 @@
 import { Blog } from "@/components/Blog";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { useEffect, useState } from "react";
-import { BlogModel, typeBlog } from "@/types/Blog";
 import Link from "next/link";
 import Spinner from "@/components/ui/spinner";
 import { supabase } from "@/lib/supabase";
+import { typeBlog } from "@/types/Blog";
+import { PostgrestError } from "@supabase/supabase-js";
 
 export default function Home() {
-  const [blogs, setBlogs] = useState<typeBlog[] | undefined>(undefined);
-  const [fetchError, setsetFetchError] = useState(null);
+  const [blogs, setBlogs] = useState<BlogModel[] | undefined>(undefined);
+  const [fetchError, setsetFetchError] = useState<PostgrestError | undefined>(undefined);
   // console.log(supabase);
 
   useEffect(() => {
@@ -18,7 +19,8 @@ export default function Home() {
         .from('blogs')
         .select("*");
       if (error) {
-        console.error('Error fetching data:', error)
+        console.error('Error fetching data:', error.message)
+        setsetFetchError(error as any)
         setBlogs(undefined)
       }
       else {
@@ -28,17 +30,6 @@ export default function Home() {
     }
     fetchData();
   }, [])
-
-
-
-  // useEffect(() => {
-  //   async function loadBlogs() {
-  //     const fetchedBlogs = await fetchTodos();
-  //     console.log(fetchedBlogs);
-  //     setBlogs(fetchedBlogs);
-  //   }
-  //   loadBlogs();
-  // }, []);
   if (!blogs) {
     return (
       <MaxWidthWrapper className="pt-4">
@@ -48,6 +39,17 @@ export default function Home() {
       </MaxWidthWrapper>
     );
   }
+
+  if (fetchError) {
+    return (
+      <MaxWidthWrapper className="pt-4">
+        <h5 className="flex justify-center items-center text-center p-3">
+          {fetchError.message}
+        </h5>
+      </MaxWidthWrapper>
+    );
+  }
+
   return (
     <MaxWidthWrapper className="my-4">
       {blogs ? blogs.map((blog: any) => (

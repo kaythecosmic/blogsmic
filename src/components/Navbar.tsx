@@ -33,13 +33,10 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex gap-1">
-          {/* <Button variant="destructive">
-            <Link href="/api/deleteAll">delete all</Link>
-          </Button> */}
-          <Button variant="link">
+          <Button variant="outline">
             <Link href="/scratch"> + new</Link>
           </Button>
-          <Button variant="link">
+          <Button variant="outline">
             <Link href="/about">about</Link>
           </Button>
           <Toggle
