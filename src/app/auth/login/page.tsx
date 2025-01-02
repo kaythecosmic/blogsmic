@@ -21,7 +21,7 @@ const AuthPage = () => {
   const HandleLogin: SubmitHandler<z.infer<typeof SchemaLoginForm>> = (data: z.infer<typeof SchemaLoginForm>) => {
     console.log(data);
   }
-  
+
   return (
     <MaxWidthWrapper>
       <div className="flex h-[90vh]">

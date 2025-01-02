@@ -1,10 +1,6 @@
 "use client"
-
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
-import Spinner from '@/components/ui/spinner';
-import useSingleBlog from '@/hooks/useSingleBlog'
 import { usePathname } from "next/navigation";
-import tagList from '@/lib/taglist';
 import { TagColorMap } from '@/lib/taglist';
 import { Tags } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -41,6 +37,7 @@ const ReadSingleBlog = () => {
   const pathname = usePathname()
   const slugKey = pathname.split('read/')[1];
   const [data, setData] = useState<BlogModel | undefined>(undefined);
+  
   useEffect(() => {
     async function fetchData() {
       const { data, error } = await supabase
