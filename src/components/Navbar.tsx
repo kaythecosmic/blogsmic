@@ -37,15 +37,15 @@ const Navbar = () => {
             <Link href="/scratch"> + new</Link>
           </Button>
           <Button variant="outline">
-            <Link href="/about">about</Link>
+            <Link href="/blogs">read</Link>
           </Button>
-          <Toggle
+          {/* <Toggle
             aria-label="Toggle Theme"
             onPressedChange={() => handleTheme()}
             className="rounded-sm p-0"
           >
             {darkTheme ? <Sun className=" h-4" /> : <Moon className=" h-4" />}
-          </Toggle>
+          </Toggle> */}
         </div>
       </nav>
     </MaxWidthWrapper>

@@ -1,69 +1,56 @@
-"use client"
-import { Blog } from "@/components/Blog";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import { useEffect, useState } from "react";
+import { ArrowRight, Volume2 } from "lucide-react";
 import Link from "next/link";
-import Spinner from "@/components/ui/spinner";
-import { supabase } from "@/lib/supabase";
-import { typeBlog } from "@/types/Blog";
-import { PostgrestError } from "@supabase/supabase-js";
 
-export default function Home() {
-  const [blogs, setBlogs] = useState<BlogModel[] | undefined>(undefined);
-  const [fetchError, setsetFetchError] = useState<PostgrestError | undefined>(undefined);
-  // console.log(supabase);
-
-  useEffect(() => {
-    async function fetchData() {
-      const { data, error } = await supabase
-        .from('blogs')
-        .select("*");
-      if (error) {
-        console.error('Error fetching data:', error.message)
-        setsetFetchError(error as any)
-        setBlogs(undefined)
-      }
-      else {
-        console.log(data);
-        setBlogs(data)
-      }
-    }
-    fetchData();
-  }, [])
-  if (!blogs) {
-    return (
-      <MaxWidthWrapper className="pt-4">
-        <h5 className="flex justify-center items-center text-center p-3">
-          <Spinner />
-        </h5>
-      </MaxWidthWrapper>
-    );
-  }
-
-  if (fetchError) {
-    return (
-      <MaxWidthWrapper className="pt-4">
-        <h5 className="flex justify-center items-center text-center p-3">
-          {fetchError.message}
-        </h5>
-      </MaxWidthWrapper>
-    );
-  }
-
+export default function Main() {
   return (
-    <MaxWidthWrapper className="my-4">
-      {blogs ? blogs.map((blog: any) => (
-        <Blog
-          key={blog.id}
-          id={blog.id}
-          title={blog.title}
-          slug={blog.slug}
-          content={blog.content}
-          date={new Date(blog.date)}
-          readTime={blog.readTime}
-        />
-      )) : <div className="text-2xl text-center p-4 font-bold">
-        Be the first one to <Link href="/scratch" className="text-emerald-500 underline hover:text-emerald-700">post a blog!</Link> </div>}
-    </MaxWidthWrapper>
+    <MaxWidthWrapper className="text-gray-600 flex flex-col items-center justify-center px-6">
+      <div className="flex my-auto md:w-4/5 mx-auto py-24 flex-col md:items-start md:text-left items-center text-center">
+        <p className="xl:w-3/4 text-gray-600 text-lg">
+          Not just a blog.
+        </p>
+        <h1 className="mb-5 font-semibold lg:text-6xl text-4xl items-center text-gray-900">
+          poorly maintained, but a thought rich blog.
+        </h1>
+        <div className="flex justify-center">
+          <Link
+            className="inline-flex items-center px-5 py-3 mt-2 font-medium text-white transition duration-500 ease-in-out transform bg-transparent border rounded-lg bg-gray-900"
+            href="/blogs"
+          >
+            <div className="flex gap-2 justify-center items-center"><span>read more</span> <ArrowRight size={18} /></div>
+          </Link>
+        </div>
+      </div>
+
+      <div className="bg-gray-200 text-gray-900 p-6 rounded-lg md:w-4/5">
+        <div className="flex items-center gap-4 mb-4">
+          <button
+            className="p-2 rounded-full hover:bg-gray-400 transition-colors"
+            aria-label="Play pronunciation"
+          >
+            <Volume2 className="size-8 text-primary" />
+          </button>
+          <div className="flex flex-col">
+            <h1 className="text-2xl font-bold text-primary">
+              <span>blogsmic</span>
+            </h1>
+            <h1 className="text-sm font-medium text-primary">
+              <span>/blɒgz.mɪk/</span>
+            </h1>
+          </div>
+        </div>
+
+        <div className="mb-6">
+          <span className="text-primary italic">noun</span>
+          <ol className="mt-2 list-decimal list-inside">
+
+            <li className="mb-2">
+              <span className="text-primary font-semibold">a cosmos of random blogs</span>
+              <p className="pl-6 mt-1 text-gray-600">The entrpoy of the thoughts in mind can be resonated with the one of entities in the cosmos.<br /> Hence, welcome to <b>blogsmic</b>.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </MaxWidthWrapper >
   );
 }
