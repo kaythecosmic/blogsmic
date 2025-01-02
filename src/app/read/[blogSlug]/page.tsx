@@ -37,7 +37,7 @@ const ReadSingleBlog = () => {
   const pathname = usePathname()
   const slugKey = pathname.split('read/')[1];
   const [data, setData] = useState<BlogModel | undefined>(undefined);
-  
+
   useEffect(() => {
     async function fetchData() {
       const { data, error } = await supabase
@@ -55,7 +55,7 @@ const ReadSingleBlog = () => {
       }
     }
     fetchData();
-  }, [])
+  }, [slugKey])
 
   // if (isLoading) {
   //   return (
