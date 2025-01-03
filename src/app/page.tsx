@@ -14,7 +14,7 @@ export default function Main() {
         </h1>
         <div className="flex justify-center">
           <Link
-            className="inline-flex items-center px-5 py-3 mt-2 font-medium text-white transition duration-500 ease-in-out transform bg-transparent border rounded-lg bg-gray-900"
+            className="inline-flex items-center px-4 py-2 mt-2 font-medium transition duration-500 ease-in-out transform bg-transparent border rounded-lg bg-gray-900"
             href="/blogs"
           >
             <div className="flex gap-2 justify-center items-center"><span>read more</span> <ArrowRight size={18} /></div>
@@ -46,7 +46,7 @@ export default function Main() {
 
             <li className="mb-2">
               <span className="text-primary font-semibold">a cosmos of random blogs</span>
-              <p className="pl-6 mt-1 text-gray-600">The entrpoy of the thoughts in mind can be resonated with the one of entities in the cosmos.<br /> Hence, welcome to <b>blogsmic</b>.</p>
+              <p className="pl-5 mt-1 text-gray-600">The entrpoy of the thoughts in mind can be resonated with the one of entities in the cosmos.<br /> Hence, welcome to <b>blogsmic</b>.</p>
             </li>
           </ol>
         </div>

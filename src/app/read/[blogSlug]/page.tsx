@@ -91,7 +91,7 @@ const ReadSingleBlog = () => {
               </span>
             </div>
             <div className='text-2xl md:text-3xl lg:text-4xl font-extrabold'>
-              {data.title}
+              {decodeURI(data.title)}
             </div>
           </div>
 

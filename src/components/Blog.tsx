@@ -47,10 +47,16 @@ const Blog: React.FC<InputProps> = ({
   readTime,
 }) => {
 
+
+
+  if (content.split(' ').length >= 32) {
+    content = content.split(' ').slice(0, 32).join(' ')
+  }
+
   return (
     <div
       key={id}
-      className="w-full rounded-sm mt-4 p-3 bg-secondary flex flex-col"
+      className="w-full rounded-sm mt-4 p-3 bg-secondary flex flex-col transition ease-in-out duration-700"
     >
       <div className="flex flex-row items-end justify-between border-b-[1px] pb-1 border-accent-background">
         <div>
@@ -59,7 +65,7 @@ const Blog: React.FC<InputProps> = ({
             {date.getFullYear()}
           </h5>
           <Link
-            href={"read/" + slug}
+            href={"read/" + decodeURI(slug)}
             className="font-bold text-lg lg:text-xl 2xl:text-2xl hover:underline"
           >
             {title}
@@ -71,7 +77,6 @@ const Blog: React.FC<InputProps> = ({
           </h5>
         </div>
       </div>
-
       <div>
         <div className="text-sm text-justify mt-2" dangerouslySetInnerHTML={{ __html: content }} />
       </div>

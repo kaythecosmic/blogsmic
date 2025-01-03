@@ -39,14 +39,14 @@ export default function QuillRichTE({ onChange }: any) {
   };
 
   return (
-    <div className="h-[30rem] lg:h-[40rem]">
+    <div className="h-[30rem] lg:h-[30rem]">
       <div className="h-[95%] mt-2">
         <QuillEditor
           value={content}
           onChange={handleEditorChange}
           modules={quillModules}
           formats={quillFormats}
-          className="w-full h-full bg-background rounded-md"
+          className="w-full h-full bg-background"
         />
       </div>
     </div>

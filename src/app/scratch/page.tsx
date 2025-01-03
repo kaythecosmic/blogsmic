@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { UploadIcon } from "lucide-react";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import QuillRichTE from "@/components/QuillRichTE";
 
 const SratchPage = () => {
@@ -14,19 +13,21 @@ const SratchPage = () => {
   const alltags = ["Music", "Photography", "Design", "Movies", "Travel", "Fashion", "Food", "Reviews", "Education", "Art"]
   const [selectedTags, setSelectedTags] = useState<string[]>([])
 
-  const router = useRouter();
   const handleBlogPost = () => {
     const tokens = blogContent.split(" ");
+    console.log(encodeURI(blogTitle.replaceAll(" ", "-")));
+
     let newBlog = {
-      slug: blogTitle.replaceAll(" ", "-"),
+      slug: encodeURI(blogTitle.replaceAll(" ", "-")),
       title: blogTitle,
       content: blogContent,
       date: new Date(),
       readTime: Math.ceil(tokens.length / 230),
       tags: selectedTags
     };
-    axios.post("/api/insert/", newBlog).then(res => {
-      window.location.href = "/";
+
+    axios.post("/api/blogpost/", newBlog).then(res => {
+      window.location.href = "/blogs";
     });
   };
 
@@ -86,8 +87,8 @@ const SratchPage = () => {
 
         <div className="flex justify-end mt-[2rem]">
           <Button
-            variant={"secondary"}
-            className="text-md font-bold border hover:bg-background"
+            variant={"default"}
+            className="text-md font-regular border"
             onClick={handleBlogPost}
           >
             Post

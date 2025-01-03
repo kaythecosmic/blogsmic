@@ -26,15 +26,15 @@ const Navbar = () => {
 
   return (
     <MaxWidthWrapper>
-      <nav className="flex justify-between items-center border-0 border-b-[1px] border-foreground pt-2 pb-1">
+      <nav className="flex justify-between items-center border-b-[1px] border-b-slate-300 pt-3 pb-2 mx-2">
         <div>
           <Link href="/">
-            <h1 className="font-bold text-lg">the blogsmic</h1>
+            <h1 className="font-bold text-2xl">the blogsmic</h1>
           </Link>
         </div>
         <div className="flex gap-1">
           <Button variant="outline">
-            <Link href="/scratch"> + new</Link>
+            <Link href="/scratch">scratch</Link>
           </Button>
           <Button variant="outline">
             <Link href="/blogs">read</Link>
